@@ -1,0 +1,35 @@
+import type { GraphQLResolveInfo } from "graphql";
+import { AggregateAvanceArgs } from "./args/AggregateAvanceArgs";
+import { CreateManyAvanceArgs } from "./args/CreateManyAvanceArgs";
+import { CreateOneAvanceArgs } from "./args/CreateOneAvanceArgs";
+import { DeleteManyAvanceArgs } from "./args/DeleteManyAvanceArgs";
+import { DeleteOneAvanceArgs } from "./args/DeleteOneAvanceArgs";
+import { FindFirstAvanceArgs } from "./args/FindFirstAvanceArgs";
+import { FindFirstAvanceOrThrowArgs } from "./args/FindFirstAvanceOrThrowArgs";
+import { FindManyAvanceArgs } from "./args/FindManyAvanceArgs";
+import { FindUniqueAvanceArgs } from "./args/FindUniqueAvanceArgs";
+import { FindUniqueAvanceOrThrowArgs } from "./args/FindUniqueAvanceOrThrowArgs";
+import { GroupByAvanceArgs } from "./args/GroupByAvanceArgs";
+import { UpdateManyAvanceArgs } from "./args/UpdateManyAvanceArgs";
+import { UpdateOneAvanceArgs } from "./args/UpdateOneAvanceArgs";
+import { UpsertOneAvanceArgs } from "./args/UpsertOneAvanceArgs";
+import { Avance } from "../../../models/Avance";
+import { AffectedRowsOutput } from "../../outputs/AffectedRowsOutput";
+import { AggregateAvance } from "../../outputs/AggregateAvance";
+import { AvanceGroupBy } from "../../outputs/AvanceGroupBy";
+export declare class AvanceCrudResolver {
+    aggregateAvance(ctx: any, info: GraphQLResolveInfo, args: AggregateAvanceArgs): Promise<AggregateAvance>;
+    createManyAvance(ctx: any, info: GraphQLResolveInfo, args: CreateManyAvanceArgs): Promise<AffectedRowsOutput>;
+    createOneAvance(ctx: any, info: GraphQLResolveInfo, args: CreateOneAvanceArgs): Promise<Avance>;
+    deleteManyAvance(ctx: any, info: GraphQLResolveInfo, args: DeleteManyAvanceArgs): Promise<AffectedRowsOutput>;
+    deleteOneAvance(ctx: any, info: GraphQLResolveInfo, args: DeleteOneAvanceArgs): Promise<Avance | null>;
+    findFirstAvance(ctx: any, info: GraphQLResolveInfo, args: FindFirstAvanceArgs): Promise<Avance | null>;
+    findFirstAvanceOrThrow(ctx: any, info: GraphQLResolveInfo, args: FindFirstAvanceOrThrowArgs): Promise<Avance | null>;
+    avances(ctx: any, info: GraphQLResolveInfo, args: FindManyAvanceArgs): Promise<Avance[]>;
+    avance(ctx: any, info: GraphQLResolveInfo, args: FindUniqueAvanceArgs): Promise<Avance | null>;
+    getAvance(ctx: any, info: GraphQLResolveInfo, args: FindUniqueAvanceOrThrowArgs): Promise<Avance | null>;
+    groupByAvance(ctx: any, info: GraphQLResolveInfo, args: GroupByAvanceArgs): Promise<AvanceGroupBy[]>;
+    updateManyAvance(ctx: any, info: GraphQLResolveInfo, args: UpdateManyAvanceArgs): Promise<AffectedRowsOutput>;
+    updateOneAvance(ctx: any, info: GraphQLResolveInfo, args: UpdateOneAvanceArgs): Promise<Avance | null>;
+    upsertOneAvance(ctx: any, info: GraphQLResolveInfo, args: UpsertOneAvanceArgs): Promise<Avance>;
+}

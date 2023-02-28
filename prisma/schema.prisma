@@ -1,0 +1,97 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+generator typegraphql {
+  provider           = "typegraphql-prisma"
+  output             = "../prisma/generated/type-graphql"
+  emitTranspiledCode = true
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Enum_Rol {
+  Estudiante
+  Administrador
+  Lider
+}
+
+enum Enum_Estado_Usuario {
+  Pendiente
+  Autorizado
+  Desautorizado
+}
+
+enum Enum_Estado_Inscripcion {
+  Acepdado
+  Rechazado
+  Pendiente
+}
+
+enum Enum_Estado_Proyecto {
+  Activo
+  Inactivo
+}
+
+enum Enum_Fase_Proyecto {
+  Iniciado
+  En_Desarrollo
+  Terminado
+}
+
+model Usuario {
+  id             String              @id @default(cuid())
+  correo         String              @unique
+  identificacion String              @unique
+  nombre         String
+  apellido       String
+  rol            Enum_Rol
+  estado         Enum_Estado_Usuario @default(Pendiente)
+
+  inscripcion Inscripcion[]
+  proyecto    Proyecto[]
+  avance      Avance[]
+}
+
+model Inscripcion {
+  id           String                  @id @default(cuid())
+  proyecto     Proyecto                @relation(fields: [proyectoId], references: [id])
+  estudiante   Usuario                 @relation(fields: [usuarioId], references: [id])
+  estado       Enum_Estado_Inscripcion @default(Pendiente)
+  fechaIngreso DateTime                @default(now())
+  usuarioId    String
+  proyectoId   String
+}
+
+model Proyecto {
+  id                   String               @id @default(cuid())
+  nombre               String
+  objetivosGenerales   String
+  objetivosEspesificos String
+  presupuesto          Float
+  fechaInicio          DateTime             @default(now())
+  fechaFin             DateTime?
+  lider                Usuario              @relation(fields: [usuarioId], references: [id])
+  usuarioId            String
+  estado               Enum_Estado_Proyecto @default(Inactivo)
+  fase                 Enum_Fase_Proyecto?
+  avance               Avance[]
+  inscripcion          Inscripcion[]
+}
+
+model Avance {
+  id            String   @id @default(cuid())
+  proyecto      Proyecto @relation(fields: [proyectoId], references: [id])
+  proyectoId    String
+  fecha         DateTime @default(now())
+  descripcion   String
+  observaciones String
+  estudiante    Usuario  @relation(fields: [usuarioId], references: [id])
+  usuarioId     String
+}
