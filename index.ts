@@ -20,8 +20,8 @@ const functionBuildSchema = async () => {
     }),
   });
 
-  const { url } = await server.listen(4000);
-  console.log(`Server running at ${url}`);
+  server.listen(process.env.PORT || 4000).then(({ url }) => console.log(`Server running at ${url}`))
+  .catch((error) => console.error(error));
 };
 
 functionBuildSchema();
