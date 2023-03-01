@@ -17,6 +17,7 @@ const functionBuildSchema = async () => {
       ...req,
       prisma,
     }),
+    introspection: true,
   });
   server
     .listen(process.env.PORT || 4000)
